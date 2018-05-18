@@ -22,9 +22,10 @@ public class UserController {
         return userRepository.findOne(userId);
     }
 
-    @DeleteMapping("/{userId")
+    @DeleteMapping("/{userId}")
     public HttpStatus deleteUserById(@PathVariable Long userId) {
-        userRepository.delete(userId);
+        User userToDelete = userRepository.findOne(userId);
+        userRepository.delete(userToDelete);
         return HttpStatus.OK;
     }
 
