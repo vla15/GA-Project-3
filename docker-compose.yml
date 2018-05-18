@@ -52,4 +52,5 @@ services:
     image: jimmyoak/flyway:4.0.3
     command: "wait-for-it --timeout=30 --strict postgresdev:5432 -- flyway migrate"
     volumes:
+      - './flyway/conf':/flway/conf'
       - './flyway/sql:/flyway/sql'
