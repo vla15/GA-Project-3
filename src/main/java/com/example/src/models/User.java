@@ -39,6 +39,9 @@ public class User {
     @Column(name = "PROFILE")
     private String profile;
 
+    public User() {
+
+    }
     public User(String firstName, String lastName, int age, String occupation, String ethnicity, String interests, String profile) {
         this.firstName = firstName;
         this.lastName = lastName;
