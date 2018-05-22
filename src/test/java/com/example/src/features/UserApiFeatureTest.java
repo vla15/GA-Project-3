@@ -72,7 +72,7 @@ public class UserApiFeatureTest {
 
         $$("[data-user-list-display]").shouldHave(CollectionCondition.size(2));
 
-
+        //checking created users
         long firstUserId = firstUser.getId();
         $(".user-" + firstUserId + "-name").shouldHave(text("someone"));
         $(".user-" + firstUserId + "-name").shouldHave(text("Ima"));
@@ -81,10 +81,11 @@ public class UserApiFeatureTest {
         $(".user-" + secondUserId + "-name").shouldHave(text("Inker"));
         $(".user-" + secondUserId + "-name").shouldHave(text("Dosa"));
 
+
+        //creating users
+
         $(".create-user-btn").click();
-
         $(".create-user-form").should(appear);
-
         $("#create-user-first-name").sendKeys("johnny");
         $("#create-user-last-name").sendKeys("walker");
         $("#create-user-age").sendKeys("30");
@@ -94,7 +95,7 @@ public class UserApiFeatureTest {
 
         $(".submit-create-user-button").click();
 
-        $("[data-user-list-display").should(appears);
+        $("[data-user-list-display").should(appear);
         $$("[data-user-list-display]").shouldHave(CollectionCondition.size(3));
     }
 
