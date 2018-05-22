@@ -22,3 +22,9 @@ Please find the user stories available here.
 
 Please find the wireframes here.
 [Figma Wireframes](https://www.figma.com/file/PnFhQzeJRXWbrRzrMwcpSMFf/GA-Project-3)
+
+
+## Running tests
+
+Run `cd/ ui && ng test ` to execute the unit tests.
+To run selenium tests, go into the src folder of the root directory, right click the UserApiFeature Test and select run.
