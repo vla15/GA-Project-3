@@ -13,6 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.appears;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -68,6 +72,30 @@ public class UserApiFeatureTest {
 
         $$("[data-user-list-display]").shouldHave(CollectionCondition.size(2));
 
+
+        long firstUserId = firstUser.getId();
+        $(".user-" + firstUserId + "-name").shouldHave(text("someone"));
+        $(".user-" + firstUserId + "-name").shouldHave(text("Ima"));
+
+        long secondUserId = secondUser.getId();
+        $(".user-" + secondUserId + "-name").shouldHave(text("Inker"));
+        $(".user-" + secondUserId + "-name").shouldHave(text("Dosa"));
+
+        $(".create-user-btn").click();
+
+        $(".create-user-form").should(appear);
+
+        $("#create-user-first-name").sendKeys("johnny");
+        $("#create-user-last-name").sendKeys("walker");
+        $("#create-user-age").sendKeys("30");
+        $("#create-user-occupation").sendKeys("warrior");
+        $("#create-user-ethnicity").sendKeys("monkey");
+        $("#create-user-interests").sendKeys("champion");
+
+        $(".submit-create-user-button").click();
+
+        $("[data-user-list-display").should(appears);
+        $$("[data-user-list-display]").shouldHave(CollectionCondition.size(3));
     }
 
 }
