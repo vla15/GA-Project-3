@@ -11,6 +11,8 @@ Then cd back to the root directory and run
 
     docker-compose up
 
+## Proposals
+[Proposal](https://docs.google.com/document/d/1RT78MOKZPt05nMHsJcF568VAo9c4iPbEcId1xhcs2Ig/edit?usp=sharing)
 
 ## User stories
 
