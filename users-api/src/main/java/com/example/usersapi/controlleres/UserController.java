@@ -22,6 +22,25 @@ public class UserController {
         return userRepository.findOne(userId);
     }
 
+    @GetMapping("/search")
+    public Iterable<User> getUsersByParams(@RequestParam("filter") String filter, @RequestParam("data") String value) {
+        switch(filter) {
+            case "firstName":
+                return userRepository.findByFirstName(value);
+            case "lastName":
+                return userRepository.findByLastName(value);
+            case "interests":
+                return userRepository.findByIntersts(value);
+            case "occupation":
+                return userRepository.findByOccupation(value);
+            case "ethnicity":
+                return userRepository.findByEthnicity(value);
+            case "age":
+                return userRepository.findByAge(value);
+            default: return userRepository.findAll();
+        }
+    }
+
     @DeleteMapping("/{userId}")
     public HttpStatus deleteUserById(@PathVariable Long userId) {
         User userToDelete = userRepository.findOne(userId);
