@@ -62,3 +62,16 @@ services:
     volumes:
       - ./ui:/ui
     command: "npm start"
+  auth:
+    image: "node:9"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./auth-api:/home/node/app
+    depends_on:
+      - eureka
+    ports:
+      - "3000:3000"
+    command: "npm start"
