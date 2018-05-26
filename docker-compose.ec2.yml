@@ -54,14 +54,6 @@ services:
     volumes:
       - './flyway/conf:/flyway/conf'
       - './flyway/sql:/flyway/sql'
-  ui:
-    image: johnpapa/angular-cli
-    ports:
-      - "4200:4200"
-    working_dir: /ui
-    volumes:
-      - ./ui:/ui
-    command: "npm start"
   auth:
     image: "node:9"
     user: "node"
