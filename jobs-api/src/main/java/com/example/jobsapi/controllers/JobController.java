@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class JobController {
+
     @Autowired
-    private UserRepository userRepository;
     private JobRepository jobRepository;
 
     @PostMapping("/apply")
-    public Job addApplication(@RequestBody Job jobApplication) {
-        return jobRepository.save(jobApplication);
+    public Job addNewApplication(@RequestBody Job job) {
+        return jobRepository.save(job);
     }
 
     @GetMapping("/{userId}")
     public Iterable<Job> getJobsAppliedTo(@PathVariable int userId) {
-        return jobRepository.findAllByUserId(userId);
+        return jobRepository.findByUserId(userId);
     }
 }
