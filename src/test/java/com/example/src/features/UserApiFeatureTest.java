@@ -68,7 +68,9 @@ public class UserApiFeatureTest {
         System.setProperty("selenide.browser", "Chrome");
         System.setProperty("selenide.headless", "true");
 
-        open("http://localhost:4200");
+        open("http://localhost:4200/user");
+
+
 
         $$("[data-user-list-display]").shouldHave(CollectionCondition.size(2));
 
@@ -83,9 +85,11 @@ public class UserApiFeatureTest {
 
 
         //creating users
+        $(".drawer__button--open").click();
+        $(".drawer").should(appear);
 
-        $(".create-user-btn").click();
-        $(".create-user-form").should(appear);
+        $(".drawer__button--create-user").click();
+        $(".create__user__page").should(appear);
         $("#create-user-first-name").sendKeys("johnny");
         $("#create-user-last-name").sendKeys("walker");
         $("#create-user-age").sendKeys("30");
@@ -98,5 +102,4 @@ public class UserApiFeatureTest {
         $("[data-user-list-display").should(appear);
         $$("[data-user-list-display]").shouldHave(CollectionCondition.size(3));
     }
-
 }

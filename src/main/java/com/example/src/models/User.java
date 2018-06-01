@@ -48,4 +48,5 @@ public class User {
         this.interests = interests;
         this.profile = profile;
     }
+
 }
