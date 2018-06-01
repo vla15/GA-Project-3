@@ -1,6 +1,6 @@
-# New York City User Search Engine
+# New York City Job Board
 
-Welcome to the New York city user search engine database.  Here you'll find detailed user profiles of those users who utilize the New York City search engine.  It enables you to view, create, delete, and update users in the user database.
+Welcome to the New York city job board.  Here you'll find detailed user profiles of those users who utilize the New York City job board and have the capability to look for jobs and apply.  It enables you to view, create, delete, and update users in a user database, and allows those same users to apply to search and apply for jobs.
 
 
 # To start the program
@@ -29,4 +29,4 @@ Please find the wireframes here.
 ## Running tests
 
 Run `cd/ ui && ng test ` to execute the unit tests.
-To run selenium tests, go into the src folder of the root directory, right click the UserApiFeature Test and select run.
+To run selenium tests, go into the src folder of the root directory, right click the UserApiFeature, NavigationTest, and JobsApiFeature and select run.
