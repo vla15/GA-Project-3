@@ -1,5 +1,5 @@
 CREATE TABLE USERS (
-  ID serial,
+  ID serial PRIMARY KEY,
   EMAIL varchar(200),
   PASSWORD varchar(200),
   FIRST_NAME varchar(100),

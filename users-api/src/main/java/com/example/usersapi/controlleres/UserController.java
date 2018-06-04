@@ -30,11 +30,9 @@ public class UserController {
             case "lastName":
                 return userRepository.findByLastName(value);
             case "interests":
-                return userRepository.findByIntersts(value);
+                return userRepository.findByInterests(value);
             case "occupation":
                 return userRepository.findByOccupation(value);
-            case "ethnicity":
-                return userRepository.findByEthnicity(value);
             case "age":
                 return userRepository.findByAge(value);
             default: return userRepository.findAll();

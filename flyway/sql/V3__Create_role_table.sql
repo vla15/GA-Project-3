@@ -1,4 +1,4 @@
 CREATE TABLE ROLES (
-  ID serial,
-  ROLE varchar(255) DEFAULT NULL,
+  ID serial PRIMARY KEY,
+  ROLE_NAME varchar(255) DEFAULT NULL
 );
