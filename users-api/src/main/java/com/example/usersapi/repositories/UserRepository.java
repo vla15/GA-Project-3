@@ -19,8 +19,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
     Iterable<User> findByOccupation(@Param("value") String value);
 
     @Query("Select u FROM User u where u.interests = :value")
-    Iterable<User> findByIntersts(@Param("value") String value);
-
-    @Query("Select u FROM User u where u.ethnicity = :value")
-    Iterable<User> findByEthnicity(@Param("value") String value);
+    Iterable<User> findByInterests(@Param("value") String value);
 }

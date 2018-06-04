@@ -29,8 +29,11 @@ public class User {
     @Column(name = "OCCUPATION")
     private String occupation;
 
-    @Column(name = "ETHNICITY")
+    @Column(name = "EMAIL")
     private String ethnicity;
+
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "INTERESTS")
     private String interests;
