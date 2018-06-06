@@ -6,6 +6,7 @@ import com.example.usersapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +16,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public Iterable<User> getAllUsers() {
@@ -57,16 +58,21 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User registerNewUser(@RequestBody User user) {
-        String newPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(newPassword);
-        return userRepository.save(user);
+    public User registerNewUser(@RequestBody User user) throws Exception {
+        User userFromDb = userRepository.findByEmail(user.getEmail());
+        if (userFromDb != null) {
+            throw new Exception("An account already exists with that email");
+        } else {
+            String newPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(newPassword);
+            return userRepository.save(user);
+        }
     }
 
     @PostMapping("/login")
     public User login(@RequestBody User user) {
         User userFromDb = userRepository.findByEmail(user.getEmail());
-        if (bCryptPasswordEncoder.encode(user.getPassword()) == userFromDb.getPassword()) {
+        if (passwordEncoder.encode(user.getPassword()) == userFromDb.getPassword()) {
             return userFromDb;
         } else {
             return null;
