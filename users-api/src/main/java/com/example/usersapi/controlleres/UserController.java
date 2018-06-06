@@ -60,12 +60,12 @@ public class UserController {
     @PostMapping("/register")
     public User registerNewUser(@RequestBody User user) throws Exception {
         User userFromDb = userRepository.findByEmail(user.getEmail());
-        if (userFromDb != null) {
-            throw new Exception("An account already exists with that email");
-        } else {
+        if (userFromDb == null) {
             String newPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(newPassword);
             return userRepository.save(user);
+        } else {
+            throw new Exception("An account already exists with that email");
         }
     }
 
@@ -86,7 +86,6 @@ public class UserController {
         userFromDb.setFirstName(newUser.getFirstName());
         userFromDb.setLastName(newUser.getLastName());
         userFromDb.setAge(newUser.getAge());
-        userFromDb.setEmail(newUser.getEmail());
         userFromDb.setOccupation(newUser.getOccupation());
         userFromDb.setInterests(newUser.getInterests());
         userFromDb.setProfile(newUser.getProfile());
