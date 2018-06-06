@@ -30,7 +30,7 @@ public class User {
     private String occupation;
 
     @Column(name = "EMAIL")
-    private String ethnicity;
+    private String email;
 
     @Column(name = "PASSWORD")
     private String password;

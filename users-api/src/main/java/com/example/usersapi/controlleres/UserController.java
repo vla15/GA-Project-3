@@ -1,9 +1,11 @@
 package com.example.usersapi.controlleres;
 
+import com.example.usersapi.configurations.WebMvcConfig;
 import com.example.usersapi.models.User;
 import com.example.usersapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,6 +13,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
     public Iterable<User> getAllUsers() {
@@ -51,6 +56,23 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    @PostMapping("/register")
+    public User registerNewUser(@RequestBody User user) {
+        String newPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(newPassword);
+        return userRepository.save(user);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody User user) {
+        User userFromDb = userRepository.findByEmail(user.getEmail());
+        if (bCryptPasswordEncoder.encode(user.getPassword()) == userFromDb.getPassword()) {
+            return userFromDb;
+        } else {
+            return null;
+        }
+    }
+
     @PutMapping("/{userId}")
     public User updateUserById(@RequestBody User newUser, @PathVariable Long userId) {
         User userFromDb = userRepository.findOne(userId);
@@ -58,7 +80,7 @@ public class UserController {
         userFromDb.setFirstName(newUser.getFirstName());
         userFromDb.setLastName(newUser.getLastName());
         userFromDb.setAge(newUser.getAge());
-        userFromDb.setEthnicity(newUser.getEthnicity());
+        userFromDb.setEmail(newUser.getEmail());
         userFromDb.setOccupation(newUser.getOccupation());
         userFromDb.setInterests(newUser.getInterests());
         userFromDb.setProfile(newUser.getProfile());
