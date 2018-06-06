@@ -70,12 +70,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody User user) {
+    public User login(@RequestBody User user) throws Exception {
         User userFromDb = userRepository.findByEmail(user.getEmail());
-        if (passwordEncoder.encode(user.getPassword()) == userFromDb.getPassword()) {
+        if (passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())) {
             return userFromDb;
         } else {
-            return null;
+            throw new Exception("Incorrect password");
         }
     }
 
